@@ -13,11 +13,11 @@ public interface UserDAO {
 
     void saveUser(User user) throws SQLException;
 
-    User selectUser(int id) throws SQLException;
+    User selectUser(long id) throws SQLException;
 
     List<User> selectAllUsers() throws SQLException;
 
-    boolean deleteUser(int id) throws SQLException;
+    boolean deleteUser(long id) throws SQLException;
 
     boolean updateUser(User user) throws SQLException;
 }

@@ -2,6 +2,7 @@ package servlets.users;
 
 import dao.UserDAO;
 import entities.User;
+import servlets.users.impl.UserDaoImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +17,7 @@ public class AddUserServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        userDAO = new UserDAO();
+        userDAO = new UserDaoImpl();
     }           
 
     @Override

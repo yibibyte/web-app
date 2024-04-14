@@ -10,18 +10,27 @@ public class User {
     private int age;
     private String password;
     private String email;
-    private static long id; // Используется только для Коллекций, ни для БД(своя логика)
+    private long id;
 
     public User() {
+    }
+
+    public User(String username) {
+        this.username = username;
+    }
+
+    public User(String username, String firstName) {
+        this.username = username;
+        this.firstName = firstName;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getId() {
         return id;
     }
-
-//    public void setId(long id) {
-//        this.id = id;
-//    }
 
     public String getUsername() {
         return username;
@@ -74,4 +83,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }

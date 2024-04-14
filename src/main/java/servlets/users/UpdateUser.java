@@ -6,6 +6,7 @@ package servlets.users;
 
 import dao.UserDAO;
 import entities.User;
+import servlets.users.impl.UserDaoImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("user/update")
 public class UpdateUser extends HttpServlet {
@@ -20,7 +22,7 @@ public class UpdateUser extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        userDAO = new UserDAO();
+        userDAO = new UserDaoImpl();
     }
 
     @Override
@@ -44,7 +46,11 @@ public class UpdateUser extends HttpServlet {
         updatedUser.setEmail(email);
 
         // Обновление пользователя
-        userDAO.updateUser(updatedUser);
+        try {
+            userDAO.updateUser(updatedUser);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

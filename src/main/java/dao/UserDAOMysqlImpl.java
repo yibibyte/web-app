@@ -67,7 +67,7 @@ public class UserDAOMysqlImpl implements UserDAO{
      * @throws SQLException
      */
     @Override
-    public User selectUser(int id) throws SQLException {
+    public User selectUser(long id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
@@ -133,7 +133,7 @@ public class UserDAOMysqlImpl implements UserDAO{
     }
 
     @Override
-    public boolean deleteUser(int id) throws SQLException {
+    public boolean deleteUser(long id) throws SQLException {
         return false;
     }
 
