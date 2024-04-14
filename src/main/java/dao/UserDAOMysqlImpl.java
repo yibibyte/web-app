@@ -45,20 +45,20 @@ public class UserDAOMysqlImpl implements UserDAO{
         return connection;
     }
 
-    @Override
-    public void insertUser(User user) throws SQLException {
-        System.out.println(INSERT_USERS_SQL);
-        // try-with-resource statement will auto close the connection.
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
-            preparedStatement.setString(1, user.getUsername());
-            preparedStatement.setString(2, user.getEmail());
-            System.out.println(preparedStatement);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            printSQLException(e);
-        }
-    }
+
+//    public void insertUser(User user) throws SQLException {
+//        System.out.println(INSERT_USERS_SQL);
+//        // try-with-resource statement will auto close the connection.
+//        try (Connection connection = getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
+//            preparedStatement.setString(1, user.getUsername());
+//            preparedStatement.setString(2, user.getEmail());
+//            System.out.println(preparedStatement);
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            printSQLException(e);
+//        }
+//    }
 
 
     /**
@@ -69,7 +69,7 @@ public class UserDAOMysqlImpl implements UserDAO{
     @Override
     public User selectUser(long id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
-        statement.setInt(1, id);
+        statement.setLong(1, id);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             User user = new User();
@@ -120,11 +120,17 @@ public class UserDAOMysqlImpl implements UserDAO{
 
             // Step 4: Process the ResultSet object.
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
+                long id = rs.getInt("id");
+                String username = rs.getString("name");
                 String email = rs.getString("email");
                 String country = rs.getString("country");
-                users.add(new User(id, name, email, country));
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                int age = Integer.parseInt(rs.getString("age"));
+                String password = rs.getString("password");
+
+
+                users.add(new User(username, firstName, lastName, age, password, email, country, id));
             }
         } catch (SQLException e) {
             printSQLException(e);

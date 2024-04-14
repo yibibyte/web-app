@@ -42,7 +42,7 @@ public class UserDAOPostgreSQLImpl implements UserDAO{
     @Override
     public User selectUser(long id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
-        statement.setInt(1, id);
+        statement.setLong(1, id);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             User user = new User();

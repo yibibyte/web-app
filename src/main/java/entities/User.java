@@ -10,9 +10,20 @@ public class User {
     private int age;
     private String password;
     private String email;
+    private String country;
     private long id;
 
     public User() {
+    }
+
+    public User(String username, String firstName, String lastName, int age, String password, String email, String country, long id) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.password = password;
+        this.email = email;
+        this.id = id;
     }
 
     public User(String username) {
@@ -24,12 +35,12 @@ public class User {
         this.firstName = firstName;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUsername() {
